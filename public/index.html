@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru" id="top">
+<head>
+    <meta charset="UTF-8">
+    <title>LIDON — лидеры сферы</title>
+    <meta name="description" content="LIDON — сообщество лидеров сферы. Независимый реестр специалистов, профессиональное обучение, юридическая поддержка и развитие экспертного статуса.">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="LIDON — лидеры сферы">
+    <meta property="og:description" content="LIDON — сообщество лидеров сферы. Независимый реестр специалистов, профессиональное обучение, юридическая поддержка и развитие экспертного статуса.">
+    <meta property="og:url" content="https://mgno1.ru/">
+    <meta property="og:site_name" content="LIDON">
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/user-menu.css">
+    <link rel="stylesheet" href="/css/auth-modal.css">
+    <link rel="stylesheet" href="/css/legal-help.css">
+    <link rel="stylesheet" href="/css/cooperation.css">
+    <link rel="stylesheet" href="/css/colleagues-modal.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="#top" class="logo-block">
+            <div class="logo-mark">LDN</div>
+            <div class="logo-text">
+                <div class="logo-text-main">LIDON</div>
+                <div class="logo-text-sub">ЛИДЕРЫ СФЕРЫ</div>
+            </div>
+        </a>
+
+        <nav class="main-nav">
+            <a href="#about" class="nav-link">О LIDON</a>
+            <a href="#leaders" class="nav-link">Реестр лидеров</a>
+            <a href="#how-status" class="nav-link">Стать лидером</a>
+            <a href="/ethics.html" class="nav-link">Кодекс LIDON</a>
+            <a href="/academy.html" class="nav-link">Академия</a>
+            <a href="/legal.html" class="nav-link">Юр. поддержка</a>
+        </nav>
+
+        <div class="auth-user" id="authUserWrap">
+            <a href="#" id="btn-login" class="btn btn-outline">Войти</a>
+
+            <div class="user-menu" id="userMenu" style="display:none;">
+                <button
+                    type="button"
+                    class="btn btn-outline user-menu__btn"
+                    id="userMenuBtn"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                    <span id="userMenuName">Пользователь</span>
+                    <span aria-hidden="true">▾</span>
+                </button>
+
+                <div class="user-menu__drop" id="userMenuDrop" style="display:none;">
+                    <button type="button" class="user-menu__item" id="userProfileBtn">Профиль</button>
+                    <button type="button" class="user-menu__item" id="userStatusDocsBtn">Мой статус и документы</button>
+                    <button type="button" class="user-menu__item" id="userChatsBtn">Мои чаты</button>
+                    <button type="button" class="user-menu__item" id="userSupportBtn">Поддержка</button>
+
+                    <div class="user-menu__sep"></div>
+
+                    <button type="button" class="user-menu__item" id="userLogoutBtn">Выйти</button>
+                    <button type="button" class="user-menu__item user-menu__item-danger" id="userDeleteBtn">Удалить аккаунт</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="about" class="section">
+        <div class="container hero">
+            <div class="hero-left">
+                <h1 class="hero-title">LIDON — лидеры сферы</h1>
+
+                <p class="hero-text">
+                    LIDON объединяет специалистов и управленцев из разных отраслей,
+                    которые подтверждают свой уровень не словами, а результатами. Мы формируем независимый реестр
+                    экспертов и присваиваем статус «Лидер сферы» тем, кто проходит многоступенчатый отбор,
+                    обучение и внутреннюю аттестацию.
+                </p>
+
+                <p class="hero-text">
+                    В LIDON входят эксперты по недвижимости, автоэкспертизе, финансовой и юридической поддержке,
+                    образованию, стилю и цифровым решениям. Общее для всех — ответственность за качество работы
+                    и значимый результат для клиента.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#leaders" id="btn-hero-leaders" class="btn btn-primary">
+                        Единый реестр лидеров России
+                    </a>
+
+                    <button type="button" id="btn-hero-legal-chat" class="btn btn-outline">
+                        Юридическая помощь лидерам
+                    </button>
+
+                    <button type="button" id="btn-hero-cooperation-chat" class="btn btn-outline">
+                        Обращение и сотрудничество с LIDON
+                    </button>
+
+                    <button type="button" id="btn-hero-colleagues" class="btn btn-outline">
+                        Общайтесь с коллегами
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="hero-image-wrapper">
+                    <img src="/img/hero-leaders.jpg" alt="Специалисты и эксперты — Лидеры сферы">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="section">
+        <div class="container">
+            <h2 class="section-title">Преимущества статуса «Лидер сферы»</h2>
+
+            <div class="cards-grid">
+                <article class="card">
+                    <h3 class="card-title">Признание и доверие</h3>
+                    <p class="card-text">
+                        Статус «Лидер сферы» — официальный знак профессионального доверия. Он помогает клиентам и
+                        партнёрам быстрее принимать решения и снижает риски по качеству услуг и репутации специалиста.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3 class="card-title">Сильное окружение</h3>
+                    <p class="card-text">
+                        Участник получает доступ к сообществу практиков из разных отраслей. Встречи, экспертные
+                        сессии и совместные проекты усиливают личный бренд и открывают новые возможности роста.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3 class="card-title">Развитие и обучение</h3>
+                    <p class="card-text">
+                        Лидеры проходят внутренние образовательные программы LIDON, подтверждают статус на
+                        аттестации и регулярно обновляют профессиональные компетенции.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3 class="card-title">Конкурентное преимущество</h3>
+                    <p class="card-text">
+                        Для клиентов и партнёров пометка «Лидер сферы» — сигнал, что перед ними специалист,
+                        которого уже проверили коллеги по рынку и профессиональное сообщество.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3 class="card-title">Юридическая поддержка</h3>
+                    <p class="card-text">
+                        Лидеры сферы имеют доступ к бесплатной юридической консультации LIDON по вопросам
+                        договоров, ответственности, защиты репутации и базовых правовых рисков в профессиональной практике.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="geography" class="section">
+        <div class="container">
+            <div class="block">
+                <h2 class="section-title">География присутствия</h2>
+                <p class="block-text">
+                    LIDON развивается как профессиональное сообщество по всей стране.
+                    Представители и партнёрские клубы работают более чем в 40 регионах России —
+                    от Калининграда до Дальнего Востока.
+                </p>
+                <p class="block-text">
+                    Среди городов: Москва, Санкт-Петербург, Казань, Тюмень, Томск, Иваново, Краснодар, Сургут,
+                    Владивосток, Тверь, Архангельск, Новокузнецк, Геленджик, Таганрог и другие.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-status" class="section">
+        <div class="container">
+            <div class="block">
+                <h2 class="section-title">Как получить статус «Лидер сферы»</h2>
+
+                <ol class="steps-list">
+                    <li><strong>Заявка.</strong> Вы заполняете анкету с описанием опыта, достижений и специализации.</li>
+                    <li><strong>Экспертный отбор.</strong> Экспертный совет изучает профиль кандидата.</li>
+                    <li><strong>Обучение.</strong> Допущенные кандидаты проходят внутреннюю программу LIDON.</li>
+                    <li><strong>Аттестация.</strong> Тестирование, разбор кейсов или защита проекта.</li>
+                    <li><strong>Присвоение статуса.</strong> Кандидату выдается статус «Лидер сферы».</li>
+                </ol>
+
+                <div class="block-actions">
+                    <a href="/apply.html" id="btn-apply" class="btn btn-primary">Подать заявку</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="academy" class="section">
+        <div class="container">
+            <div class="block">
+                <h2 class="section-title">Академия LIDON</h2>
+                <p class="block-text">
+                    Академия LIDON — программы по развитию экспертизы, сервиса, управления и личного бренда.
+                </p>
+
+                <a href="/academy.html" id="btn-academy-programs" class="btn btn-outline">
+                    Узнать о программах Академии
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="legal" class="section">
+        <div class="container">
+            <div class="block">
+                <h2 class="section-title">Юридическая поддержка лидеров</h2>
+                <p class="block-text">
+                    Лидеры сферы могут получить бесплатную юридическую консультацию по вопросам договоров,
+                    ответственности, защиты репутации и другим аспектам профессиональной деятельности.
+                </p>
+
+                <a href="/legal.html" id="btn-legal-request" class="btn btn-outline">
+                    Перейти к правилам и консультации
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="ethics" class="section">
+        <div class="container">
+            <div class="block">
+                <h2 class="section-title">Кодекс LIDON</h2>
+                <p class="block-text">
+                    Единые правила поведения для всех участников LIDON: лидеров сферы, кандидатов и представителей
+                    экспертного сообщества. В кодексе зафиксированы принципы честности, прозрачности и ответственности.
+                </p>
+
+                <a href="/ethics.html" id="btn-open-code" class="btn btn-outline">
+                    Ознакомиться с кодексом и FAQ
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <span class="footer-copy">© LIDON — лидеры сферы, 2025</span>
+
+        <nav class="footer-nav">
+            <a href="#about" class="footer-link">О LIDON</a>
+            <a href="#how-status" class="footer-link">Как получить статус</a>
+            <a href="/ethics.html" class="footer-link">Кодекс LIDON</a>
+            <a href="/legal.html" class="footer-link">Юр. консультация</a>
+        </nav>
+    </div>
+</footer>
+
+<div id="legal-help-widget" class="legal-help-widget" aria-hidden="true">
+    <div class="legal-help-widget__panel" role="dialog" aria-label="Юридическая помощь лидерам">
+        <button
+            type="button"
+            class="legal-help-widget__close"
+            id="legal-help-widget-close"
+            aria-label="Закрыть чат с юристом">
+            ×
+        </button>
+        <iframe
+            src="/legal-help.html"
+            title="Юридическая помощь лидерам — чат с юристом"
+            class="legal-help-iframe"
+            loading="lazy">
+        </iframe>
+    </div>
+</div>
+
+<div id="cooperation-widget" class="cooperation-widget" aria-hidden="true">
+    <div class="cooperation-widget__panel" role="dialog" aria-label="Обращение и сотрудничество с LIDON">
+        <button
+            type="button"
+            class="cooperation-widget__close"
+            id="cooperation-widget-close"
+            aria-label="Закрыть чат обращения и сотрудничества">
+            ×
+        </button>
+        <iframe
+            src="/cooperation.html"
+            title="Обращение и сотрудничество с LIDON — чат"
+            class="cooperation-iframe"
+            loading="lazy">
+        </iframe>
+    </div>
+</div>
+
+<script src="/js/legal-help.js"></script>
+<script src="/js/cooperation.js"></script>
+<script src="/js/colleagues-modal.js"></script>
+
+<div class="modal-overlay" id="auth-modal" aria-hidden="true">
+    <div class="modal-window auth-modal" role="dialog" aria-label="Вход и регистрация">
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab auth-tab-active" data-tab="login">Войти</button>
+            <button type="button" class="auth-tab" data-tab="register">Регистрация</button>
+            <button type="button" class="auth-tab" data-tab="forgot">Забыли пароль</button>
+        </div>
+
+        <div class="auth-pane auth-pane-active" data-pane="login">
+            <h3 class="modal-title">Вход</h3>
+            <div class="auth-row">
+                <label class="auth-label">Email</label>
+                <input class="auth-input" type="email" id="authLoginEmail" autocomplete="email">
+            </div>
+            <div class="auth-row">
+                <label class="auth-label">Пароль</label>
+                <input class="auth-input" type="password" id="authLoginPass" autocomplete="current-password">
+            </div>
+            <div class="auth-actions">
+                <button type="button" class="btn btn-primary" id="authLoginBtn">Войти</button>
+                <button type="button" class="btn btn-outline" id="authCloseBtn1">Закрыть</button>
+            </div>
+            <div class="auth-msg" id="authLoginMsg"></div>
+        </div>
+
+        <div class="auth-pane" data-pane="register">
+            <h3 class="modal-title">Регистрация</h3>
+
+            <div class="auth-row">
+                <label class="auth-label">Фамилия *</label>
+                <input class="auth-input" type="text" id="authRegLastName" autocomplete="family-name">
+            </div>
+
+            <div class="auth-row">
+                <label class="auth-label">Имя *</label>
+                <input class="auth-input" type="text" id="authRegFirstName" autocomplete="given-name">
+            </div>
+
+            <div class="auth-row">
+                <label class="auth-label">Отчество *</label>
+                <input class="auth-input" type="text" id="authRegMiddleName" autocomplete="additional-name">
+            </div>
+
+            <div class="auth-row">
+                <label class="auth-label">Город *</label>
+                <input class="auth-input" type="text" id="authRegCity" placeholder="Начните вводить: Москва…" autocomplete="off">
+                <input type="hidden" id="authRegCityId" value="">
+                <div class="auth-suggest" id="authCitySuggest" style="display:none;"></div>
+            </div>
+
+            <div class="auth-row">
+                <label class="auth-label">Основная профессия *</label>
+
+                <select class="auth-input" id="authPrimaryCategory">
+                    <option value="">Загрузка категорий…</option>
+                </select>
+
+                <select class="auth-input" id="authPrimaryProfession" disabled>
+                    <option value="">Сначала выберите категорию</option>
+                </select>
+            </div>
+
+            <div class="auth-row">
+                <label class="auth-label">Доп. профессии (до 2)</label>
+
+                <select class="auth-input" id="authExtraCat1">
+                    <option value="">Не выбрано</option>
+                </select>
+                <select class="auth-input" id="authExtraProf1" disabled>
+                    <option value="">Сначала выберите категорию</option>
+                </select>
+
+                <select class="auth-input" id="authExtraCat2">
+                    <option value="">Не выбрано</option>
+                </select>
+                <select class="auth-input" id="authExtraProf2" disabled>
+                    <option value="">Сначала выберите категорию</option>
+                </select>
+            </div>
+
+            <div class="auth-row">
+                <label class="auth-label">Email *</label>
+                <input class="auth-input" type="email" id="authRegEmail" autocomplete="email">
+            </div>
+
+            <div class="auth-row">
+                <label class="auth-label">Пароль *</label>
+                <input class="auth-input" type="password" id="authRegPass" autocomplete="new-password">
+            </div>
+
+            <div class="auth-actions">
+                <button type="button" class="btn btn-primary" id="authRegBtn">Зарегистрироваться</button>
+                <button type="button" class="btn btn-outline" id="authCloseBtn2">Закрыть</button>
+            </div>
+            <div class="auth-msg" id="authRegMsg"></div>
+        </div>
+
+        <div class="auth-pane" data-pane="forgot">
+            <h3 class="modal-title">Восстановление пароля</h3>
+            <div class="auth-row">
+                <label class="auth-label">Email</label>
+                <input class="auth-input" type="email" id="authForgotEmail" autocomplete="email">
+            </div>
+            <div class="auth-actions">
+                <button type="button" class="btn btn-primary" id="authForgotBtn">Отправить ссылку</button>
+                <button type="button" class="btn btn-outline" id="authCloseBtn3">Закрыть</button>
+            </div>
+            <div class="auth-msg" id="authForgotMsg"></div>
+        </div>
+    </div>
+
+    <div class="auth-pop" id="authPop" aria-hidden="true">
+        <div class="auth-pop__card" role="alertdialog" aria-modal="true" aria-labelledby="authPopTitle">
+            <div class="auth-pop__icon" id="authPopIcon" aria-hidden="true">✓</div>
+            <div class="auth-pop__content">
+                <div class="auth-pop__title" id="authPopTitle">Готово</div>
+                <div class="auth-pop__text" id="authPopText"></div>
+                <div class="auth-pop__hint" id="authPopHint">
+                    Если письма нет — проверьте «Спам» или «Промоакции».
+                </div>
+            </div>
+            <button type="button" class="auth-pop__btn" id="authPopOk">Ок</button>
+        </div>
+    </div>
+</div>
+
+<script src="/js/auth.js"></script>
+<script src="/js/user-menu.js"></script>
+
+</body>
+</html>
