@@ -1,0 +1,19 @@
+DELIMITER $$
+
+CREATE TRIGGER trg_user_prof_one_primary
+BEFORE INSERT ON user_professions
+FOR EACH ROW
+BEGIN
+  DECLARE cnt INT;
+  IF NEW.is_primary = 1 THEN
+    SELECT COUNT(*) INTO cnt
+      FROM user_professions
+      WHERE user_id = NEW.user_id AND is_primary = 1;
+    IF cnt > 0 THEN
+      SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Основная профессия уже задана';
+    END IF;
+  END IF;
+END$$
+
+DELIMITER ;
