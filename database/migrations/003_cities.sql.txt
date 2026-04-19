@@ -1,0 +1,19 @@
+-- 1) Таблица городов
+CREATE TABLE IF NOT EXISTS cities (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  wikidata_id VARCHAR(32) NOT NULL,      -- например Q649
+  name VARCHAR(191) NOT NULL,            -- Москва
+  region VARCHAR(191) NULL,              -- Москва / Московская область и т.п.
+  population INT UNSIGNED NULL,
+  lat DECIMAL(9,6) NOT NULL,
+  lon DECIMAL(9,6) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_wikidata_id (wikidata_id),
+  KEY idx_name (name),
+  KEY idx_population (population)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 2) Привязка города к пользователю
+ALTER TABLE users
+  ADD COLUMN city_id INT UNSIGNED NULL AFTER middle_name,
+  ADD KEY idx_city_id (city_id);

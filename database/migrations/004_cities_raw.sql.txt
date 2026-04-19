@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS cities_raw (
+  city        VARCHAR(255) NOT NULL,
+  cityLabel   VARCHAR(255) NOT NULL,
+  population  VARCHAR(32)  NULL,
+  lat         DECIMAL(10,6) NULL,
+  lon         DECIMAL(10,6) NULL,
+  regionLabel VARCHAR(255) NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
