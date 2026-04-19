@@ -1,0 +1,12 @@
+INSERT IGNORE INTO cities (wikidata_id, name, population, lat, lon, region)
+SELECT
+  REPLACE(city, 'http://www.wikidata.org/entity/', '') AS wikidata_id,
+  cityLabel AS name,
+  NULLIF(population, '') + 0 AS population,
+  lat,
+  lon,
+  NULLIF(regionLabel, '') AS region
+FROM cities_raw
+WHERE city IS NOT NULL AND city <> ''
+  AND cityLabel IS NOT NULL AND cityLabel <> ''
+  AND lat IS NOT NULL AND lon IS NOT NULL;
