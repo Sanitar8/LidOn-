@@ -175,7 +175,7 @@
   }
 
   async function refreshAuthState() {
-    var res = await fetch('/api/auth/me.php', { credentials: 'same-origin' });
+    var res = await fetch('/api/auth/me', { credentials: 'same-origin' });
     var data = await res.json().catch(function () { return { ok: true, user: null }; });
 
     if (data && data.user) {
@@ -221,7 +221,7 @@
   }
 
   async function fetchCities(q) {
-    var res = await fetch('/api/geo/cities.php?q=' + encodeURIComponent(q), { credentials: 'same-origin' });
+    var res = await fetch('/api/geo/cities?q=' + encodeURIComponent(q), { credentials: 'same-origin' });
     var data = await res.json().catch(function () { return { ok: true, items: [] }; });
     return (data && data.items) ? data.items : [];
   }
@@ -444,7 +444,7 @@
     disableProfSelect(extraProf2, 'Сначала выберите категорию');
 
     try {
-      var res = await fetch('/api/prof/professions.php', { credentials: 'same-origin' });
+      var res = await fetch('/api/prof/professions', { credentials: 'same-origin' });
       var data = await res.json().catch(function () { return { ok: true, items: [] }; });
       var items = (data && data.items) ? data.items : [];
 
@@ -506,7 +506,7 @@
       if (extras.indexOf(primary_profession_id) !== -1) throw new Error('Основная профессия не может повторяться');
       if (extras.length === 2 && extras[0] === extras[1]) throw new Error('Доп. профессии не должны совпадать');
 
-      var data = await api('/api/auth/register.php', {
+      var data = await api('/api/auth/register', {
         last_name: last_name,
         first_name: first_name,
         middle_name: middle_name,
@@ -566,7 +566,7 @@
       var email = ($('authLoginEmail').value || '').trim();
       var password = $('authLoginPass').value || '';
 
-      await api('/api/auth/login.php', { email: email, password: password });
+      await api('/api/auth/login', { email: email, password: password });
 
       setMsg($('authLoginMsg'), 'Успешный вход.', 'ok');
       await refreshAuthState();
@@ -592,7 +592,7 @@
 
     try {
       var email = ($('authForgotEmail').value || '').trim();
-      var data = await api('/api/auth/forgot.php', { email: email });
+      var data = await api('/api/auth/forgot', { email: email });
 
       setMsg($('authForgotMsg'), data.message || 'Если email есть в системе, мы отправили инструкции.', 'ok');
 
