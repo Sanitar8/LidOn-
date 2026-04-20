@@ -1,0 +1,378 @@
+/* cooperation.css — виджет на главной + чат в iframe */
+
+/* ====== ВИДЖЕТ НА INDEX ====== */
+.cooperation-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+}
+
+.cooperation-widget--open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ✅ размеры как у legal-help */
+.cooperation-widget__panel {
+  width: 460px;
+  max-width: calc(100vw - 32px);
+  height: 640px;
+  max-height: calc(100vh - 96px);
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.55);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.cooperation-widget__close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(15, 23, 42, 0.9);
+  color: #f9fafb;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background-color 0.12s ease, transform 0.08s ease;
+}
+
+.cooperation-widget__close:hover {
+  background: #020617;
+  transform: translateY(-1px);
+}
+
+.cooperation-iframe { width: 100%; height: 100%; border: none; }
+
+@media (max-width: 640px) {
+  .cooperation-widget__panel {
+    width: calc(100vw - 24px);
+    height: calc(100vh - 80px);
+    max-height: none;
+    border-radius: 18px;
+  }
+
+  .cooperation-widget {
+    left: 12px;
+    right: 12px;
+    bottom: 16px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* ====== ЧАТ В IFRAME (COOPERATION.HTML) ====== */
+html, body { margin: 0; padding: 0; height: 100%; }
+
+.coop-body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.coop-shell {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.coop-header {
+  padding: 12px 16px 10px 16px;
+  background-color: #0f172a;
+  color: #f9fafb;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.95);
+}
+
+.coop-header__title { font-size: 16px; font-weight: 700; margin: 0 0 4px 0; }
+
+.coop-header__subtitle {
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+  color: #e5e7eb;
+}
+
+.coop-main {
+  flex: 1;
+  min-height: 0;
+  background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+}
+
+.coop-messages {
+  flex: 1;
+  min-height: 0;
+  padding: 10px 14px 12px 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coop-row { display: flex; align-items: flex-start; gap: 8px; }
+.coop-row--lidon { justify-content: flex-start; }
+.coop-row--user { justify-content: flex-end; }
+
+.coop-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: #f9fafb;
+  background: #6b7280;
+}
+
+.coop-avatar--lidon { background-color: #10b981; }
+.coop-avatar--user { background-color: #0f172a; }
+
+.coop-bubble {
+  max-width: 80%;
+  padding: 8px 11px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  word-break: break-word;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.coop-bubble__text { margin-bottom: 4px; white-space: pre-wrap; }
+.coop-bubble__meta { font-size: 11px; color: #9ca3af; }
+
+.coop-bubble--lidon {
+  background-color: #e5e7eb;
+  color: #111827;
+  border-bottom-left-radius: 4px;
+}
+
+.coop-bubble--user {
+  background-color: #0f172a;
+  color: #f9fafb;
+  border-bottom-right-radius: 4px;
+}
+
+/* ✅ Composer как у legal-help: без рамки, большое поле */
+.coop-composer {
+  background: #f9fafb;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coop-composer__row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* кнопка-иконка */
+.coop-iconbtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  transition: background-color 0.12s ease, transform 0.08s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.coop-iconbtn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+}
+
+.coop-iconbtn:active { transform: translateY(0); }
+
+/* поле ввода */
+.coop-composer__text {
+  flex: 1;
+  min-height: 110px;
+  max-height: 220px;
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  resize: none;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: inherit;
+  color: #111827;
+  background: #ffffff;
+}
+
+.coop-composer__text::placeholder { color: #9ca3af; }
+
+.coop-composer__text:focus {
+  outline: none;
+  border-color: #0f172a;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.14);
+}
+
+/* send */
+.coop-send {
+  flex-shrink: 0;
+  width: 48px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: #0f172a;
+  color: #f9fafb;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.12s ease, transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+.coop-send:hover {
+  background-color: #020617;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.35);
+  transform: translateY(-1px);
+}
+
+.coop-send:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.35);
+}
+
+/* ====== ВЛОЖЕНИЕ (панель перед отправкой) ====== */
+.coop-attach {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 12px;
+  background: #f3f4f6;
+}
+
+.coop-attach__preview {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.coop-attach__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.coop-attach__fileicon { font-size: 20px; }
+
+.coop-attach__meta { min-width: 0; flex: 1; }
+
+.coop-attach__name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coop-attach__hint {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.coop-attach__remove {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.12s ease, transform 0.08s ease;
+}
+
+.coop-attach__remove:hover { background: #e5e7eb; transform: translateY(-1px); }
+.coop-attach__remove:active { transform: translateY(0); }
+
+/* attachments inside bubbles */
+.coop-attachment { margin-top: 8px; }
+
+.coop-attachment__img {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.coop-attachment__file {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  background: rgba(255,255,255,0.55);
+  font-size: 12px;
+  font-weight: 700;
+  max-width: 320px;
+}
+
+.coop-attachment__file span:last-child{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 260px;
+  display: inline-block;
+}
+
+/* SCROLLBAR */
+.coop-messages::-webkit-scrollbar { width: 7px; }
+.coop-messages::-webkit-scrollbar-track { background: #e5e7eb; border-radius: 999px; }
+.coop-messages::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 999px; }
+
+@media (max-width: 480px) {
+  .coop-header { padding: 10px 10px 8px 10px; }
+  .coop-messages { padding: 8px 10px 10px 10px; }
+  .coop-composer { padding: 10px; }
+  .coop-composer__text { min-height: 120px; }
+  .coop-bubble { max-width: 84%; }
+}

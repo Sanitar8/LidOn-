@@ -1,0 +1,130 @@
+/* academy.css — только страница Академии (без base) */
+
+/* Заголовки/текст страницы */
+.page-title {
+  font-size: 28px;
+  line-height: 1.3;
+  margin: 0 0 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.section-title {
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.intro-text {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+/* Карточка-обёртка */
+.card-wide {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 22px 22px 20px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+}
+
+/* Программы */
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.program-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 16px 18px 14px;
+}
+
+.program-title {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.program-text {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.program-meta {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+/* Модалка на Академии (своя, НЕ auth modal) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 40;
+}
+
+.modal-overlay.modal-open {
+  display: flex;
+}
+
+.modal-window {
+  max-width: 420px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 20px 22px 18px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.modal-title {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.modal-text {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .programs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .programs-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card-wide {
+    padding: 18px 16px 18px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+}

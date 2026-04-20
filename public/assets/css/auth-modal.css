@@ -1,0 +1,443 @@
+/* ============================================================
+   AUTH MODAL (Вход / Регистрация / Забыли пароль)
+   ============================================================ */
+
+/* ✅ фикс: когда модалка открыта — страница под ней не скроллится */
+body.modal-lock { overflow: hidden; }
+
+/* БАЗОВАЯ МОДАЛКА */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: none;
+  padding: 18px;
+  z-index: 2000;
+  backdrop-filter: blur(10px);
+
+  /* ✅ ВАЖНО: скроллим ОВЕРЛЕЙ */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /* ✅ чтобы “прокрутка” не уезжала на body */
+  overscroll-behavior: contain;
+}
+
+.modal-overlay.modal-open {
+  display: block;
+}
+
+/* ✅ FIX: расширили карточку, чтобы селекты/поля не “вылезали” */
+.modal-window {
+  width: 100%;
+  max-width: 760px; /* было 560px */
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  padding: 18px 18px 16px;
+  box-shadow: 0 28px 90px rgba(15, 23, 42, 0.35);
+
+  margin: 0 auto;
+  position: relative;
+
+  /* ✅ оставляем выпадашкам возможность показываться,
+     но режем именно горизонтальное “вылезание” */
+  overflow: visible;
+  overflow-x: hidden;
+
+  /* ✅ чтобы форма не вылезала за экран (и был скролл у overlay) */
+  max-height: calc(100dvh - 36px);
+}
+
+/* легкий верхний “блик” */
+.modal-window::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 110px;
+  background: radial-gradient(
+    1200px 220px at 20% 0%,
+    rgba(15, 23, 42, 0.08),
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+/* контейнер модалки */
+.auth-modal {
+  max-width: 760px; /* было 560px */
+}
+
+/* Заголовок */
+.modal-title {
+  margin: 6px 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+/* ТАБЫ */
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 14px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.auth-tab {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease,
+    transform 0.08s ease,
+    box-shadow 0.12s ease;
+}
+
+.auth-tab:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111827;
+}
+
+.auth-tab:active {
+  transform: translateY(1px);
+}
+
+.auth-tab-active {
+  background: #0f172a;
+  color: #f9fafb;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
+}
+
+/* ПАНЕЛИ */
+.auth-pane {
+  display: none;
+}
+
+.auth-pane-active {
+  display: block;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* ПОЛЯ */
+.auth-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+
+  /* ✅ важно: чтобы flex-дети не раздували ширину */
+  min-width: 0;
+}
+
+.auth-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* ✅ FIX: все поля всегда в рамках модалки */
+.auth-input {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  transition:
+    border-color 0.12s ease,
+    box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.auth-input::placeholder {
+  color: #9ca3af;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.12);
+}
+
+/* ✅ select тоже как input + не распираем от длинного текста */
+select.auth-input {
+  background: #ffffff;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+   PROF 2-STEP: аккуратные пары селектов
+   ============================================================ */
+
+.auth-row select.auth-input {
+  min-height: 42px;
+}
+
+.auth-row select.auth-input[disabled] {
+  background: #f9fafb;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* в блоке “Доп. профессии” делаем отступы ровнее */
+.auth-row .auth-input + .auth-input {
+  margin-top: 8px;
+}
+
+/* КНОПКИ */
+.auth-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* Если на мобиле — кнопки во всю ширину */
+@media (max-width: 520px) {
+  .auth-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* СООБЩЕНИЯ */
+.auth-msg {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b5563;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.auth-msg:empty {
+  display: none;
+}
+
+.auth-msg.error {
+  color: #991b1b;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.auth-msg.ok {
+  color: #065f46;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+/* ✅ адаптив: на средних экранах чуть уже */
+@media (max-width: 900px) {
+  .modal-window { max-width: 640px; }
+  .auth-modal { max-width: 640px; }
+}
+
+/* Чуть компактнее на маленьких экранах */
+@media (max-width: 420px) {
+  .modal-window {
+    padding: 14px 14px 12px;
+    border-radius: 18px;
+    max-width: 100%;
+  }
+  .auth-modal { max-width: 100%; }
+
+  .modal-title {
+    font-size: 18px;
+  }
+  .auth-tabs {
+    padding: 6px;
+  }
+}
+
+.auth-modal button {
+  font-family: inherit;
+}
+
+/* ============================================================
+   AUTH SUGGEST (autocomplete / подсказки)
+   ============================================================ */
+
+.auth-suggest {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-top: 6px;
+  overflow: hidden;
+  background: #fff;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 50;
+}
+
+.auth-suggest__item {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.auth-suggest__item:first-child {
+  border-top: 0;
+}
+
+.auth-suggest__item:hover {
+  background: #f9fafb;
+}
+
+.auth-suggest__muted {
+  color: #6b7280;
+  font-size: 12px;
+  padding: 10px 12px;
+}
+
+/* ============================================================
+   AUTH POPUP (крупное всплывающее сообщение поверх модалки)
+   ============================================================ */
+
+.auth-pop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 2300; /* выше modal-window (2000) */
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(8px);
+}
+
+.auth-pop.is-open {
+  display: flex;
+  animation: authPopFadeIn 160ms ease-out;
+}
+
+.auth-pop__card {
+  width: min(640px, 100%);
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.40);
+  padding: 18px 18px 16px;
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 14px;
+  align-items: start;
+  transform-origin: center;
+  animation: authPopScaleIn 180ms ease-out;
+}
+
+.auth-pop__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 900;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.auth-pop__title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 2px;
+}
+
+.auth-pop__text {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #111827;
+}
+
+.auth-pop__hint {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #6b7280;
+}
+
+.auth-pop__btn {
+  appearance: none;
+  border: 1px solid #e5e7eb;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform 0.08s ease, opacity 0.12s ease;
+  white-space: nowrap;
+}
+
+.auth-pop__btn:active {
+  transform: translateY(1px);
+}
+
+/* error-mode */
+.auth-pop.is-error .auth-pop__icon {
+  color: #991b1b;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.auth-pop.is-error .auth-pop__btn {
+  background: #991b1b;
+}
+
+/* small screens */
+@media (max-width: 520px) {
+  .auth-pop__card {
+    grid-template-columns: 46px 1fr;
+    grid-template-areas:
+      "icon title"
+      "icon text"
+      "btn  btn";
+  }
+  .auth-pop__icon { width: 46px; height: 46px; border-radius: 12px; font-size: 22px; }
+  .auth-pop__content { grid-column: 2; }
+  .auth-pop__btn { grid-column: 1 / -1; width: 100%; }
+}
+
+@keyframes authPopFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes authPopScaleIn {
+  from { transform: scale(0.97); opacity: 0.85; }
+  to   { transform: scale(1); opacity: 1; }
+}
