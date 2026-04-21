@@ -2,7 +2,7 @@
   'use strict';
 
   var MODAL_URL = '/colleagues-modal.html';
-  var API_MY_CHATS = '/api/colleagues/my-chats.php';
+  var API_MY_CHATS = '/api/colleagues/my-chats';
 
   function $(id) { return document.getElementById(id); }
 
@@ -30,7 +30,6 @@
   function normalizeTgUrl(url) {
     var u = (url || '').trim();
     if (!u) return '';
-    // разрешим "t.me/xxx" без протокола
     if (!/^https?:\/\//i.test(u)) u = 'https://' + u.replace(/^\/+/, '');
     return u;
   }
@@ -113,8 +112,8 @@
 
     var state = {
       activeTab: null,
-      chats: {},          // tabKey -> { title, sub, items:[] }
-      tabOrder: [],       // [tabKey, ...]
+      chats: {},
+      tabOrder: [],
       pendingFile: null,
       hydrated: false
     };
@@ -167,8 +166,6 @@
     }
 
     function buildUiFromItems(items) {
-      // items: [{profession_id, profession_name, category_name, is_primary, tg_title, tg_url}]
-      // 1) TG cards
       var tgGrid = $('colxTgGrid');
       if (tgGrid) {
         if (!items.length) {
@@ -203,7 +200,6 @@
         }
       }
 
-      // 2) Tabs (кнопки чатов) — строго по профессиям
       var tabs = $('colxTabs');
       state.chats = {};
       state.tabOrder = [];
@@ -233,7 +229,6 @@
         }
       }
 
-      // 3) bind tabs clicks
       if (tabs) {
         Array.prototype.slice.call(tabs.querySelectorAll('[data-colx-tab]')).forEach(function (btn) {
           btn.addEventListener('click', function () {
@@ -242,7 +237,6 @@
         });
       }
 
-      // activate first tab
       state.activeTab = state.tabOrder[0] || 'chat1';
       renderChat();
     }
@@ -360,7 +354,6 @@
         }
       }
 
-      // Подгружаем чаты 1 раз (или можно каждый раз — но лучше 1 раз для демо)
       if (!state.hydrated) {
         state.hydrated = true;
         var items = await fetchMyChats();

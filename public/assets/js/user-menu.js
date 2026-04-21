@@ -50,7 +50,6 @@
     }
   });
 
-  // ✅ ПРОФИЛЬ
   if (userProfileBtn) {
     userProfileBtn.addEventListener('click', function () {
       closeUserMenu();
@@ -58,15 +57,13 @@
     });
   }
 
-  // ✅ СТАТУС И ДОКУМЕНТЫ
   if (userStatusDocsBtn) {
     userStatusDocsBtn.addEventListener('click', function () {
       closeUserMenu();
-      location.href = '/documents.html'; // сделаем позже
+      location.href = '/documents.html';
     });
   }
 
-  // ✅ ЧАТЫ
   if (userChatsBtn) {
     userChatsBtn.addEventListener('click', function () {
       closeUserMenu();
@@ -81,7 +78,6 @@
     });
   }
 
-  // ✅ ПОДДЕРЖКА
   if (userSupportBtn) {
     userSupportBtn.addEventListener('click', function () {
       closeUserMenu();
@@ -89,11 +85,11 @@
     });
   }
 
-  // ✅ ВЫХОД
+  // ✅ ИСПРАВЛЕНО ЗДЕСЬ
   if (userLogoutBtn) {
     userLogoutBtn.addEventListener('click', async function () {
       try {
-        await fetch('/api/auth/logout.php', {
+        await fetch('/api/auth/logout', {
           method: 'POST',
           credentials: 'same-origin'
         });
@@ -104,7 +100,6 @@
     });
   }
 
-  // ⚠️ УДАЛЕНИЕ АККАУНТА (пока заглушка)
   if (userDeleteBtn) {
     userDeleteBtn.addEventListener('click', function () {
       closeUserMenu();
@@ -116,12 +111,9 @@
       if (!ok) return;
 
       alert('Функция удаления аккаунта будет подключена следующим шагом.');
-      // позже:
-      // location.href = '/account.html';
     });
   }
 
-  // API (на будущее)
   window.userMenuApi = {
     close: closeUserMenu,
     open: openUserMenu,

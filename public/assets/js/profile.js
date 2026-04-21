@@ -45,7 +45,7 @@
     setMsg('');
 
     try {
-      var res = await fetch('/api/auth/me.php', {
+      var res = await fetch('/api/auth/me', {
         credentials: 'same-origin'
       });
 
