@@ -19,13 +19,13 @@ $stmt = $pdo->prepare("
   SELECT
     p.id AS profession_id,
     p.name AS profession_name,
-    c.name AS category_name,
+    COALESCE(c.name, '') AS category_name,
     up.is_primary,
     COALESCE(tg.tg_title, '') AS tg_title,
     COALESCE(tg.tg_url, '') AS tg_url
   FROM user_professions up
   JOIN professions p ON p.id = up.profession_id
-  JOIN profession_categories c ON c.id = p.category_id
+  LEFT JOIN profession_categories c ON c.id = p.category_id
   LEFT JOIN profession_tg_chats tg
     ON tg.profession_id = p.id AND tg.is_active = 1
   WHERE up.user_id = ?
@@ -35,13 +35,13 @@ $stmt = $pdo->prepare("
 $stmt->execute([$uid]);
 $items = $stmt->fetchAll() ?: [];
 
-// Нормализуем ссылки (если пусто — оставим пусто, фронт покажет заглушку)
 foreach ($items as &$it) {
   $it['is_primary'] = (int)($it['is_primary'] ?? 0);
   $it['profession_id'] = (int)($it['profession_id'] ?? 0);
 
   $it['tg_title'] = trim((string)($it['tg_title'] ?? ''));
   $it['tg_url']   = trim((string)($it['tg_url'] ?? ''));
+  $it['category_name'] = trim((string)($it['category_name'] ?? ''));
 }
 unset($it);
 
