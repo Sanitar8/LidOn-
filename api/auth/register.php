@@ -75,7 +75,7 @@ try {
     $stmt->execute([$userId, $pid, 0]);
   }
 
-  // email verify (FIX: не используем плейсхолдер внутри INTERVAL, считаем expires_at в PHP)
+  // email verify
   $token = base64url_encode(random_bytes(32));
   $tokenHash = sha256($token);
 
@@ -91,7 +91,9 @@ try {
     $expires
   ]);
 
-  $verifyUrl = rtrim($CONFIG['app']['base_url'], '/') . '/api/auth/verify.php?token=' . urlencode($token);
+  // ✅ ИСПРАВЛЕНО ЗДЕСЬ
+  $verifyUrl = rtrim($CONFIG['app']['base_url'], '/') . '/api/auth/verify?token=' . urlencode($token);
+
   send_mail(
     $CONFIG,
     $email,

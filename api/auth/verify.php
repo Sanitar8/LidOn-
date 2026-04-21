@@ -26,13 +26,18 @@ if (!$row) json_err('Token invalid or expired', 400);
 
 $pdo->beginTransaction();
 try {
-  $pdo->prepare("UPDATE users SET is_verified = 1 WHERE id = ?")->execute([(int)$row['user_id']]);
-  $pdo->prepare("UPDATE auth_tokens SET used_at = NOW() WHERE id = ?")->execute([(int)$row['token_id']]);
+  $pdo->prepare("UPDATE users SET is_verified = 1 WHERE id = ?")
+      ->execute([(int)$row['user_id']]);
+
+  $pdo->prepare("UPDATE auth_tokens SET used_at = NOW() WHERE id = ?")
+      ->execute([(int)$row['token_id']]);
+
   $pdo->commit();
 } catch (Throwable $e) {
   $pdo->rollBack();
   json_err('Verify failed', 500);
 }
 
-// Можно редиректить на страницу успеха, но для простоты JSON:
-json_ok(['message' => 'Email подтверждён. Теперь можно войти.']);
+// ✅ РЕДИРЕКТ ВМЕСТО JSON
+header('Location: /index.html?verified=1');
+exit;

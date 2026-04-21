@@ -37,11 +37,11 @@ $profStmt = $pdo->prepare("
   SELECT
     p.id,
     p.name,
-    c.name AS category,
+    COALESCE(c.name, '') AS category,
     up.is_primary
   FROM user_professions up
   JOIN professions p ON p.id = up.profession_id
-  JOIN profession_categories c ON c.id = p.category_id
+  LEFT JOIN profession_categories c ON c.id = p.category_id
   WHERE up.user_id = ?
   ORDER BY up.is_primary DESC, p.name ASC
 ");
