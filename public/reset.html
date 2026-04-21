@@ -5,8 +5,8 @@
   <title>Новый пароль — LIDON</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/index.css">
 </head>
 <body>
   <header class="site-header">
@@ -51,7 +51,8 @@
         msg.textContent = '';
         try {
           var pass = document.getElementById('newpass').value || '';
-          var res = await fetch('/api/auth/reset.php', {
+
+          var res = await fetch('/api/auth/reset', {
             method:'POST',
             headers:{'Content-Type':'application/json'},
             credentials:'same-origin',
@@ -59,7 +60,11 @@
           });
 
           var data = await res.json();
-          if (!res.ok || !data.ok) throw new Error((data && data.error) || 'Ошибка');
+
+          if (!res.ok || !data.ok) {
+            throw new Error((data && data.error) || 'Ошибка');
+          }
+
           msg.textContent = data.message || 'Готово. Теперь можно войти.';
         } catch(e) {
           msg.textContent = e.message;

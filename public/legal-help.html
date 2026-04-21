@@ -5,7 +5,8 @@
   <title>Юридическая помощь лидерам — чат</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="/css/legal-help.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/legal-help.css">
 </head>
 <body class="legal-help-body">
 
@@ -21,7 +22,6 @@
     <main class="chat-main" aria-label="Диалог с юристом">
       <div id="chatMessages" class="chat-messages">
 
-        <!-- Стартовое сообщение юриста -->
         <div class="chat-row chat-row--lawyer">
           <div class="chat-avatar chat-avatar--lawyer" aria-hidden="true">L</div>
           <div class="chat-bubble chat-bubble--lawyer">
@@ -36,10 +36,8 @@
       </div>
     </main>
 
-    <!-- ✅ Composer: больше, без "окна внутри окна" -->
     <section class="chat-composer" aria-label="Отправка сообщения юристу">
 
-      <!-- панель выбранного файла -->
       <div class="chat-attach" id="chatAttach" style="display:none;" aria-live="polite">
         <div class="chat-attach__preview" id="chatAttachPreview" aria-hidden="true"></div>
         <div class="chat-attach__meta">
@@ -52,7 +50,6 @@
       </div>
 
       <div class="chat-composer__row">
-        <!-- кнопка прикрепления (иконка SVG) -->
         <button
           id="chatClip"
           type="button"
@@ -96,6 +93,6 @@
 
   </div>
 
-  <script src="/js/legal-help.js"></script>
+  <script src="/assets/js/legal-help.js"></script>
 </body>
 </html>

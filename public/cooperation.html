@@ -5,7 +5,8 @@
   <title>Обращение и сотрудничество с LIDON — чат</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="/css/cooperation.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/cooperation.css">
 </head>
 <body class="coop-body">
 
@@ -21,7 +22,6 @@
     <main class="coop-main" aria-label="Диалог с LIDON">
       <div id="coopMessages" class="coop-messages" aria-live="polite">
 
-        <!-- Стартовое сообщение LIDON -->
         <div class="coop-row coop-row--lidon">
           <div class="coop-avatar coop-avatar--lidon" aria-hidden="true">L</div>
           <div class="coop-bubble coop-bubble--lidon">
@@ -36,10 +36,8 @@
       </div>
     </main>
 
-    <!-- ✅ Composer + вложения -->
     <section class="coop-composer" aria-label="Отправка сообщения">
 
-      <!-- панель выбранного файла -->
       <div class="coop-attach" id="coopAttach" style="display:none;" aria-live="polite">
         <div class="coop-attach__preview" id="coopAttachPreview" aria-hidden="true"></div>
         <div class="coop-attach__meta">
@@ -52,7 +50,6 @@
       </div>
 
       <div class="coop-composer__row">
-        <!-- кнопка прикрепления -->
         <button
           id="coopClip"
           type="button"
@@ -96,6 +93,6 @@
 
   </div>
 
-  <script src="/js/cooperation.js"></script>
+  <script src="/assets/js/cooperation.js"></script>
 </body>
 </html>
