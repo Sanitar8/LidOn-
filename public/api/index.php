@@ -13,11 +13,13 @@ $routes = [
     'POST /auth/login'      => __DIR__ . '/../../api/auth/login.php',
     'POST /auth/forgot'     => __DIR__ . '/../../api/auth/forgot.php',
     'POST /auth/reset'      => __DIR__ . '/../../api/auth/reset.php',
+    'GET /auth/verify'      => __DIR__ . '/../../api/auth/verify.php',
     'GET /auth/me'          => __DIR__ . '/../../api/auth/me.php',
     'POST /auth/logout'     => __DIR__ . '/../../api/auth/logout.php',
 
     'GET /geo/cities'       => __DIR__ . '/../../api/geo/cities.php',
     'GET /prof/professions' => __DIR__ . '/../../api/prof/professions.php',
+    'GET /colleagues/my-chats' => __DIR__ . '/../../api/colleagues/my-chats.php',
 ];
 
 $key = $method . ' ' . $path;
